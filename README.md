@@ -79,4 +79,4 @@ npm run dev
 Visit `http://localhost:5173` to see the app running locally!
 
 ---
-*Built with Agentic AI.*
+
