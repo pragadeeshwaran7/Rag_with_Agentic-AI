@@ -1,6 +1,11 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
+import sys
+
+# Add the api folder to python path for Vercel
+sys.path.append(os.path.dirname(__file__))
+
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
