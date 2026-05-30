@@ -6,7 +6,7 @@ from langchain_core.documents import Document
 from .kb_loader import load_kb_documents
 from .chunking import simple_text_chunk
 from .embeddings import get_embedding_model
-from .vector_store import upsert_documents, query_similar
+from .vector_store import upsert_documents, query_similar, HAS_CHROMADB
 
 
 def _collection_name(board: str, subject: str) -> str:
@@ -38,7 +38,7 @@ def retrieve_relevant_context(
     chunks = simple_text_chunk(raw_docs)
 
     embedding_model = get_embedding_model()
-    if not embedding_model:
+    if not embedding_model or not HAS_CHROMADB:
         return chunks[:max_chunks]
 
     coll_name = _collection_name(board, subject)

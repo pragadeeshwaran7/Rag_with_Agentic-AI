@@ -1,12 +1,19 @@
 import os
 from typing import List, Optional
 
-import chromadb
-from chromadb.utils import embedding_functions
+try:
+    import chromadb
+    from chromadb.utils import embedding_functions
+    HAS_CHROMADB = True
+except ImportError:
+    HAS_CHROMADB = False
+
 from langchain_core.documents import Document
 
 
-def _get_chroma_client(vector_store_path: str) -> chromadb.ClientAPI:
+def _get_chroma_client(vector_store_path: str):
+    if not HAS_CHROMADB:
+        return None
     if not os.path.isdir(vector_store_path):
         os.makedirs(vector_store_path, exist_ok=True)
     client = chromadb.PersistentClient(path=vector_store_path)
