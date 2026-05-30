@@ -28,10 +28,12 @@ app.add_middleware(
 )
 
 @app.get("/api/")
+@app.get("/")
 def health_check():
     return {"status": "ok", "message": "AI Question Paper Generator API is running"}
 
 @app.get("/api/boards")
+@app.get("/boards")
 def list_boards():
     """Returns available boards and their subjects"""
     # Assuming we have CBSE, ICSE, WB Board
@@ -43,6 +45,7 @@ def list_boards():
     return {"boards": boards}
 
 @app.post("/api/generate", response_model=GenerateResponse)
+@app.post("/generate", response_model=GenerateResponse)
 async def generate_paper(request: GenerateRequest):
     try:
         # 1. Fetch Board Pattern
