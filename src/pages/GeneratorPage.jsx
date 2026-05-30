@@ -9,7 +9,8 @@ export default function GeneratorPage() {
     board: 'CBSE',
     subject: 'Science',
     difficulty: 'Medium',
-    full_paper: true
+    full_paper: true,
+    topic_focus: ''
   });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -106,6 +107,17 @@ export default function GeneratorPage() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-400 mb-2">Topic Focus / Instructions (Optional)</label>
+              <input
+                type="text"
+                placeholder="e.g. Focus only on Thermodynamics and Light"
+                className="input-field"
+                value={formData.topic_focus}
+                onChange={(e) => setFormData({ ...formData, topic_focus: e.target.value })}
+              />
             </div>
 
             <div className="pt-4">

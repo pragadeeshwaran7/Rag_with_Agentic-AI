@@ -60,7 +60,8 @@ async def generate_paper(request: GenerateRequest):
             subject=request.subject,
             difficulty=request.difficulty,
             pattern=board_pattern,
-            is_full_paper=request.full_paper
+            is_full_paper=request.full_paper,
+            topic_focus=request.topic_focus
         )
 
         return GenerateResponse(

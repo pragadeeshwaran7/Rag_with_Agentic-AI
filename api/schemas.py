@@ -6,6 +6,7 @@ class GenerateRequest(BaseModel):
     subject: str
     difficulty: str = "Medium"
     full_paper: bool = True
+    topic_focus: Optional[str] = None
 
 class GenerateResponse(BaseModel):
     success: bool

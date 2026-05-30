@@ -37,6 +37,7 @@ async def generate_question_paper(
     difficulty: str,
     pattern: Dict[str, Any],
     is_full_paper: bool,
+    topic_focus: str = None,
 ) -> str:
     """
     Core RAG pipeline: retrieves board/subject-specific academic context from a
@@ -57,10 +58,12 @@ async def generate_question_paper(
 
     pattern_json = json.dumps(pattern, indent=2)
 
+    topic_instruction = f"\n\nTEACHER'S CUSTOM INSTRUCTIONS / TOPIC FOCUS:\n{topic_focus}\nYou MUST prioritize questions from these specific topics or instructions while strictly maintaining the structural board pattern." if topic_focus else ""
+
     prompt_template = """
 You are an expert academic content creator and examiner for Class 10 Board Examinations in India.
 You must generate a mock question paper for the {board} Board for the subject "{subject}".
-The overall difficulty level should be {difficulty}.
+The overall difficulty level should be {difficulty}.{topic_instruction}
 
 You are given two distinct kinds of context:
 
@@ -87,7 +90,7 @@ Generate a complete, original question paper below. Do not include any explanati
 
     prompt = PromptTemplate(
         template=prompt_template,
-        input_variables=["board", "subject", "difficulty", "pattern_json", "retrieved_context"],
+        input_variables=["board", "subject", "difficulty", "pattern_json", "retrieved_context", "topic_instruction"],
     )
 
     if not llm:
@@ -110,6 +113,7 @@ Generate a complete, original question paper below. Do not include any explanati
             "difficulty": difficulty,
             "pattern_json": pattern_json,
             "retrieved_context": retrieved_context,
+            "topic_instruction": topic_instruction,
         }
     )
 
