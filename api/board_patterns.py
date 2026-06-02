@@ -47,8 +47,8 @@ def get_board_info(board: str, subject: str):
                      "Section A is compulsory. Attempt any four questions from Section B."
                  ],
                  "sections": [
-                     {"name": "Section A", "type": "Compulsory Short Questions", "num_questions": 4, "marks_per_question": 10},
-                     {"name": "Section B", "type": "Long Answer (Attempt 4 out of 6)", "num_questions": 4, "marks_per_question": 10}
+                     {"name": "Section A (Compulsory)", "type": "Short Answer & MCQs", "num_questions": 40, "marks_per_question": 1},
+                     {"name": "Section B (Attempt 4 out of 6)", "type": "Long Answer with Subparts", "num_questions": 4, "marks_per_question": 10}
                  ]
             }
         },
