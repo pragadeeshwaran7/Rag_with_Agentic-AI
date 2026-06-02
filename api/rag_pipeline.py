@@ -57,13 +57,26 @@ async def generate_question_paper(
     ) if retrieved_docs else "No external notes available; rely on your own knowledge of the syllabus."
 
     pattern_json = json.dumps(pattern, indent=2)
+    style_guidelines = pattern.get("style_guidelines", "Follow standard Class 10 cognitive patterns.")
+    few_shot_examples = "\n".join(pattern.get("few_shot_examples", []))
 
     topic_instruction = f"\n\nTEACHER'S CUSTOM INSTRUCTIONS / TOPIC FOCUS:\n{topic_focus}\nYou MUST prioritize questions from these specific topics or instructions while strictly maintaining the structural board pattern." if topic_focus else ""
 
     prompt_template = """
-You are an expert academic content creator and examiner for Class 10 Board Examinations in India.
-You must generate a mock question paper for the {board} Board for the subject "{subject}".
-The overall difficulty level should be {difficulty}.{topic_instruction}
+You are an expert academic content creator and chief examiner for Class 10 Board Examinations in India.
+Your task is to generate a highly authentic, academically rigorous mock question paper for the {board} Board for the subject "{subject}".
+
+COGNITIVE DIFFICULTY ENFORCEMENT:
+The selected difficulty is: {difficulty}.
+- If Easy: Focus on direct recall, straightforward definitions, and simple single-step applications.
+- If Medium: Focus on analytical understanding, comparisons, and standard numericals/applications.
+- If Hard: Focus on Higher Order Thinking Skills (HOTS), multi-step problems, complex case-based inferences, and deep conceptual evaluations.
+
+BOARD SPECIFIC GUIDELINES:
+Style & Framing: {style_guidelines}
+Previous Year Question Examples (Use these to match the exact phrasing and cognitive style):
+{few_shot_examples}
+{topic_instruction}
 
 You are given two distinct kinds of context:
 
@@ -90,7 +103,11 @@ Generate a complete, original question paper below. Do not include any explanati
 
     prompt = PromptTemplate(
         template=prompt_template,
-        input_variables=["board", "subject", "difficulty", "pattern_json", "retrieved_context", "topic_instruction"],
+        input_variables=[
+            "board", "subject", "difficulty", "pattern_json", 
+            "retrieved_context", "topic_instruction", 
+            "style_guidelines", "few_shot_examples"
+        ],
     )
 
     if not llm:
@@ -114,6 +131,8 @@ Generate a complete, original question paper below. Do not include any explanati
             "pattern_json": pattern_json,
             "retrieved_context": retrieved_context,
             "topic_instruction": topic_instruction,
+            "style_guidelines": style_guidelines,
+            "few_shot_examples": few_shot_examples,
         }
     )
 

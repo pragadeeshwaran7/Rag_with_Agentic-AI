@@ -8,6 +8,11 @@ def get_board_info(board: str, subject: str):
             "Science": {
                 "total_marks": 80,
                 "time_allowed": "3 Hours",
+                "style_guidelines": "Questions must strictly align with Class 10 NCERT competency standards. Include Assertion-Reasoning (AR) questions. Include Case-Based Questions (CBQs) that require analytical thinking.",
+                "few_shot_examples": [
+                    "Q. Assertion (A): Following is a balanced chemical equation: 3Fe + 4H2O -> Fe3O4 + 4H2. Reason (R): The law of conservation of mass holds good for a chemical equation.",
+                    "Q. Read the following case: A student adds water to a white powder. It produces a hissing sound and heat. (a) Identify the powder. (b) Write the balanced reaction."
+                ],
                 "general_instructions": [
                     "This question paper consists of 39 questions in 5 sections.",
                     "All questions are compulsory. However, an internal choice is provided in some questions.",
@@ -31,6 +36,11 @@ def get_board_info(board: str, subject: str):
             "Science": {
                  "total_marks": 80,
                  "time_allowed": "2 Hours",
+                 "style_guidelines": "Questions must align with CISCE Class 10 standards. Focus heavily on precise definitions, numericals requiring mandatory SI units, balanced chemical equations, and labeled anatomical/physiological diagrams.",
+                 "few_shot_examples": [
+                     "Q. (a) Define guttation. (b) Write a balanced chemical equation for the reaction between dilute sulphuric acid and zinc.",
+                     "Q. A convex mirror is used as a rearview mirror. Explain giving two reasons based on its optical properties."
+                 ],
                  "general_instructions": [
                      "Answers to this Paper must be written on the paper provided separately.",
                      "You will not be allowed to write during the first 15 minutes.",
@@ -46,6 +56,11 @@ def get_board_info(board: str, subject: str):
             "Science": {
                 "total_marks": 90,
                 "time_allowed": "3 Hours 15 Minutes",
+                "style_guidelines": "Questions must align with West Bengal Board (WBBSE) Class 10 standards (Madhyamik). Use straightforward definitions, standard textbook-style derivations, and direct theoretical/numerical questions.",
+                "few_shot_examples": [
+                    "Q. State Boyle's law. Mathematically express it.",
+                    "Q. What is the relation between the focal length and radius of curvature of a spherical mirror?"
+                ],
                 "general_instructions": [
                     "Regular candidates must answer all questions.",
                     "First 15 minutes are for reading the question paper."
